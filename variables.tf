@@ -68,3 +68,4 @@ variable "auto_minor_version_upgrade" {
   description = "Should the cluster autmoatically be updated to the latest minor vesrion"
   default     = false
 }
+
