@@ -8,7 +8,7 @@ variable "environment" {
 
 variable "number_of_nodes" {
   description = "The number of nodes in this cluster"
-  default     = 1
+  default     = ""
 }
 
 variable "node_type" {
@@ -59,7 +59,7 @@ variable "engine_version" {
   default     = "4.0.10"
 }
 
-variable "paramter_group_name" {
+variable "parameter_group_name" {
   description = "The parameter group name for this cluster"
   default     = "default.redis4.0"
 }
@@ -69,3 +69,37 @@ variable "auto_minor_version_upgrade" {
   default     = false
 }
 
+variable "replicas_per_node_group" {
+  description = "Set for cluster mode: the number of replica nodes in each node group (required if using cluster mode)"
+  default     = ""
+}
+
+variable "num_node_groups" {
+  description = "Set for cluster mode: the number of node groups (shards) for this Redis replication group (required if using cluster mode)"
+  default     = ""
+}
+
+variable "notification_topic_arn" {
+  description = "The ARN of an SNS topic to send Elasticache notifications to"
+  default     = ""
+}
+
+variable "snapshot_window" {
+  description = "The daily time range which ElastiCache will begin taking daily snapshots"
+  default     = ""
+}
+
+variable "snapshot_retention_limit" {
+  description = "Redis only: the retention period of snapshots kept in days"
+  default     = ""
+}
+
+variable "automatic_failover_enabled" {
+  description = "Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. Must be enabled for Redis (cluster mode enabled) replication groups."
+  default     = "false"
+}
+
+variable "kms_key_id" {
+  description = "The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at_rest_encryption_enabled is true"
+  default     = ""
+}
