@@ -8,49 +8,33 @@ resource "aws_elasticache_subnet_group" "elasticache_redis_cluster" {
 }
 
 resource "aws_elasticache_replication_group" "elasticache_redis_cluster" {
-  count                         = var.auth_required ? 0 : 1
-  automatic_failover_enabled    = false
-  replication_group_id          = "${var.name}-rg"
-  replication_group_description = "Replication group for the ${var.name} cluster"
-  node_type                     = var.node_type
-  number_cache_clusters         = var.number_of_nodes
-  engine_version                = var.engine_version
-  parameter_group_name          = var.paramter_group_name
-
-  security_group_ids         = [aws_security_group.elasticache_redis_cluster.id]
-  subnet_group_name          = aws_elasticache_subnet_group.elasticache_redis_cluster.name
-  port                       = 6379
-  at_rest_encryption_enabled = var.at_rest_encryption_enabled
-  transit_encryption_enabled = var.transit_encryption_enabled
-  auto_minor_version_upgrade = var.auto_minor_version_upgrade
-
-  tags = merge(
-    var.tags,
-    {
-      "Name" = format("%s-%s", var.environment, var.name)
-    },
-    {
-      "Env" = var.environment
-    },
-  )
-}
-
-resource "aws_elasticache_replication_group" "elasticache_redis_cluster_with_auth" {
-  count                         = var.auth_required ? 1 : 0
-  automatic_failover_enabled    = false
-  replication_group_id          = "${var.name}-rg"
-  replication_group_description = "Replication group for the ${var.name} cluster"
-  node_type                     = var.node_type
-  number_cache_clusters         = var.number_of_nodes
-  engine_version                = var.engine_version
-  parameter_group_name          = var.paramter_group_name
-  security_group_ids            = [aws_security_group.elasticache_redis_cluster.id]
-  subnet_group_name             = aws_elasticache_subnet_group.elasticache_redis_cluster.name
-  port                          = 6379
   at_rest_encryption_enabled    = var.at_rest_encryption_enabled
-  transit_encryption_enabled    = var.transit_encryption_enabled
+  auth_token                    = var.auth_token != "" ? var.auth_token : null
   auto_minor_version_upgrade    = var.auto_minor_version_upgrade
-  auth_token                    = var.auth_token
+  automatic_failover_enabled    = var.automatic_failover_enabled
+  engine_version                = var.engine_version
+  kms_key_id                    = var.kms_key_id != "" ? var.kms_key_id : null
+  node_type                     = var.node_type
+  notification_topic_arn        = var.notification_topic_arn != "" ? var.notification_topic_arn : null
+  number_cache_clusters         = var.number_of_nodes != "" ? var.number_of_nodes : null
+  parameter_group_name          = var.parameter_group_name
+  port                          = 6379
+  replication_group_description = "Replication group for the ${var.name} cluster"
+  replication_group_id          = "${var.name}-rg"
+  security_group_ids            = [aws_security_group.elasticache_redis_cluster.id]
+  snapshot_retention_limit      = var.snapshot_retention_limit != "" ? var.snapshot_retention_limit : null
+  snapshot_window               = var.snapshot_window != "" ? var.snapshot_window : null
+  subnet_group_name             = aws_elasticache_subnet_group.elasticache_redis_cluster.name
+  transit_encryption_enabled    = var.transit_encryption_enabled
+
+  # Cluster mode configuration
+  dynamic cluster_mode {
+    for_each = var.automatic_failover_enabled != false ? [1] : []
+    content {
+      replicas_per_node_group = var.replicas_per_node_group
+      num_node_groups         = var.num_node_groups
+    }
+  }
 
   tags = merge(
     var.tags,
