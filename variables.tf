@@ -39,11 +39,6 @@ variable "auth_token" {
   default     = ""
 }
 
-variable "auth_required" {
-  description = "Should redis AUTH be enabled for this cluster"
-  default     = false
-}
-
 variable "cidr_blocks" {
   description = "cidr blocks from which this cluster should accept connections"
   default     = []
