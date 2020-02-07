@@ -29,6 +29,7 @@ module "fake_redis" {
 | engine\_version | The engine version for this cluster | string | `"4.0.10"` | no |
 | environment | The environment the redis cluster is running in i.e. dev, prod etc | string | n/a | yes |
 | kms\_key\_id | The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at\_rest\_encryption\_enabled is true | string | `""` | no |
+| maintenance_window | Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00 | string | n/a | yes |
 | name | A descriptive name for the redis cluster | string | n/a | yes |
 | node\_type | The type of nodes to use for this cluster | string | n/a | yes |
 | notification\_topic\_arn | The ARN of an SNS topic to send Elasticache notifications to | string | `""` | no |
