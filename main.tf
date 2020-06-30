@@ -26,7 +26,7 @@ resource "aws_elasticache_replication_group" "elasticache_redis_cluster" {
   snapshot_window               = var.snapshot_window != "" ? var.snapshot_window : null
   subnet_group_name             = aws_elasticache_subnet_group.elasticache_redis_cluster.name
   transit_encryption_enabled    = var.transit_encryption_enabled
-
+  maintenance_window            = var.maintenance_window
   # Cluster mode configuration
   dynamic cluster_mode {
     for_each = var.automatic_failover_enabled != false ? [1] : []

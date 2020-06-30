@@ -98,3 +98,8 @@ variable "kms_key_id" {
   description = "The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at_rest_encryption_enabled is true"
   default     = ""
 }
+
+variable "maintenance_window" {
+  description = "The type of nodes to use for this cluster"
+  default     = "sun:05:00-sun:09:00"
+}
