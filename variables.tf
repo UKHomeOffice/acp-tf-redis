@@ -100,6 +100,11 @@ variable "kms_key_id" {
 }
 
 variable "maintenance_window" {
-  description = "The type of nodes to use for this cluster"
+  description = "Specifies the weekly time range for when maintenance on the cache cluster is performed. The format is ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period."
   default     = "sun:05:00-sun:09:00"
+}
+
+variable "multi_az_enabled" {
+  description = "Enable multi-az for this instance"
+  default     = false
 }
