@@ -50,7 +50,7 @@ resource "aws_elasticache_replication_group" "elasticache_redis_cluster" {
 
 resource "aws_security_group" "elasticache_redis_cluster" {
   name        = "${var.name}-security-group"
-  description = "The security group used to manage access to the redis cluster"
+  description = "The security group used to manage access to the test redis cluster"
   vpc_id      = var.vpc_id
 
   tags = merge(
