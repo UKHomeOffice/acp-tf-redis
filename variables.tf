@@ -108,3 +108,8 @@ variable "multi_az_enabled" {
   description = "Enable multi-az for this instance"
   default     = false
 }
+
+variable "egress_cidr_blocks" {
+  description = "Cidr blocks which this cluster should allow egress traffic to"
+  default     = ["0.0.0.0/0"]
+}
