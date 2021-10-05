@@ -79,6 +79,11 @@ variable "notification_topic_arn" {
   default     = ""
 }
 
+variable "snapshot_name" {
+  description = "The name of a snapshot from which to restore data into the new node group. (Changing the snapshot_name forces a new resource)."
+  default     = ""
+}
+
 variable "snapshot_window" {
   description = "The daily time range which ElastiCache will begin taking daily snapshots"
   default     = ""

@@ -38,6 +38,7 @@ module "fake_redis" {
 | number\_of\_nodes | The number of nodes in this cluster | string | `""` | no |
 | parameter\_group\_name | The parameter group name for this cluster | string | `"default.redis4.0"` | no |
 | replicas\_per\_node\_group | Set for cluster mode: the number of replica nodes in each node group \(required if using cluster mode\) | string | `""` | no |
+| snapshot\_name | The name of a snapshot from which to restore data into the new node group. Changing the snapshot_name forces a new resource | string | `""` | no |
 | snapshot\_retention\_limit | Redis only: the retention period of snapshots kept in days | string | `""` | no |
 | snapshot\_window | The daily time range which ElastiCache will begin taking daily snapshots | string | `""` | no |
 | subnet\_ids | The list of subnet IDs associated to a vpc | list | `<list>` | no |
