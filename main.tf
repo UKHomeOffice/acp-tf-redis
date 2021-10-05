@@ -24,6 +24,7 @@ resource "aws_elasticache_replication_group" "elasticache_redis_cluster" {
   replication_group_description = "Replication group for the ${var.name} cluster"
   replication_group_id          = "${var.name}-rg"
   security_group_ids            = [aws_security_group.elasticache_redis_cluster.id]
+  snapshot_name                 = var.snapshot_name
   snapshot_retention_limit      = var.snapshot_retention_limit != "" ? var.snapshot_retention_limit : null
   snapshot_window               = var.snapshot_window != "" ? var.snapshot_window : null
   subnet_group_name             = aws_elasticache_subnet_group.elasticache_redis_cluster.name
