@@ -96,7 +96,7 @@ variable "snapshot_retention_limit" {
 
 variable "automatic_failover_enabled" {
   description = "Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. Must be enabled for Redis (cluster mode enabled) replication groups."
-  default     = "false"
+  default     = false
 }
 
 variable "kms_key_id" {
