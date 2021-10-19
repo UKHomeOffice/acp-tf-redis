@@ -6,6 +6,11 @@ variable "environment" {
   description = "The environment the redis cluster is running in i.e. dev, prod etc"
 }
 
+variable "egress_cidr_blocks" {
+  description = "Cidr blocks which this cluster should allow egress traffic to"
+  default     = ["0.0.0.0/0"]
+}
+
 variable "number_of_nodes" {
   description = "The number of nodes in this cluster"
   default     = 1
@@ -68,4 +73,3 @@ variable "auto_minor_version_upgrade" {
   description = "Should the cluster autmoatically be updated to the latest minor vesrion"
   default     = false
 }
-
