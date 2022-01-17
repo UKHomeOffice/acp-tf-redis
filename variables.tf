@@ -31,6 +31,7 @@ variable "at_rest_encryption_enabled" {
 
 variable "transit_encryption_enabled" {
   description = "Should transit encryption be enabled for this cluster"
+  type        = bool
   default     = false
 }
 
@@ -41,11 +42,13 @@ variable "auth_token" {
 
 variable "cidr_blocks" {
   description = "cidr blocks from which this cluster should accept connections"
+  type        = list(string)
   default     = []
 }
 
 variable "tags" {
   description = "A map of tags to add to all resources"
+  type        = map(string)
   default     = {}
 }
 
@@ -61,6 +64,7 @@ variable "parameter_group_name" {
 
 variable "auto_minor_version_upgrade" {
   description = "Should the cluster autmoatically be updated to the latest minor vesrion"
+  type        = bool
   default     = false
 }
 
@@ -96,6 +100,7 @@ variable "snapshot_retention_limit" {
 
 variable "automatic_failover_enabled" {
   description = "Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. Must be enabled for Redis (cluster mode enabled) replication groups."
+  type        = bool
   default     = false
 }
 
@@ -111,10 +116,12 @@ variable "maintenance_window" {
 
 variable "multi_az_enabled" {
   description = "Enable multi-az for this instance"
+  type        = bool
   default     = false
 }
 
 variable "egress_cidr_blocks" {
   description = "Cidr blocks which this cluster should allow egress traffic to"
+  type        = list(string)
   default     = ["0.0.0.0/0"]
 }

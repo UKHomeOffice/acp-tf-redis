@@ -1,7 +1,3 @@
-terraform {
-  required_version = ">= 0.12"
-}
-
 resource "aws_elasticache_subnet_group" "elasticache_redis_cluster" {
   name       = "${var.name}-subnet"
   subnet_ids = var.subnet_ids
@@ -30,7 +26,7 @@ resource "aws_elasticache_replication_group" "elasticache_redis_cluster" {
   subnet_group_name             = aws_elasticache_subnet_group.elasticache_redis_cluster.name
   transit_encryption_enabled    = var.transit_encryption_enabled
   # Cluster mode configuration
-  dynamic cluster_mode {
+  dynamic "cluster_mode" {
     for_each = var.automatic_failover_enabled != false ? [1] : []
     content {
       replicas_per_node_group = var.replicas_per_node_group
